@@ -178,6 +178,10 @@ class SampleCollection implements Iterable<Sample> {
      * @param strict if set to false, will ignore samples with missing files, otherwise will throw an exception in such case.
      * @param sort whether to sort sample metadata by sample id.
      */
+    public SampleCollection(String sampleMetadataFileName, int calc) {
+		this(sampleMetadataFileName,  Software.VDJtools, false, true, true, false, calc);
+    }
+    
     public SampleCollection(String sampleMetadataFileName,  Software software = Software.VDJtools,
                             boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false, int calc =1) {
         this.software = software

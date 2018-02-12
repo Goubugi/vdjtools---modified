@@ -48,11 +48,13 @@ def opt = cli.parse(args)
 
 if (opt == null)
     System.exit(2)
- calculations = (opt.c ?: TOP_DEFAULT).toInteger()
+
 if (opt.h || opt.arguments().size() == 0) {
     cli.usage()
     System.exit(2)
 }
+
+calculations = (opt.c ?: TOP_DEFAULT).toInteger()
 
 // Check if metadata is provided
 //hello
