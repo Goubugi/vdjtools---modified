@@ -43,12 +43,12 @@ cli.m(longOpt: "metadata", argName: "filename", args: 1,
         "Metadata file. First and second columns should contain file name and sample id. " +
                 "Header is mandatory and will be used to assign column names for metadata.")
 cli.u(longOpt: "unweighted", "Will count each clonotype only once, apart from conventional frequency-weighted histogram.")
-
+cli.c(longOpt: "calculations", args: 1, "Enter 1 for combined, 2 for nucleotide, and 3 for amino acid")
 def opt = cli.parse(args)
 
 if (opt == null)
     System.exit(2)
-
+ calculations = (opt.c ?: TOP_DEFAULT).toInteger()
 if (opt.h || opt.arguments().size() == 0) {
     cli.usage()
     System.exit(2)
@@ -81,8 +81,8 @@ def scriptName = getClass().canonicalName.split("\\.")[-1]
 println "[${new Date()} $scriptName] Reading sample(s)"
 
 def sampleCollection = metadataFileName ?
-        new SampleCollection((String) metadataFileName) :
-        new SampleCollection(opt.arguments()[0..-2])
+        new SampleCollection((String) metadataFileName,calc=calculations) :
+        new SampleCollection(opt.arguments()[0..-2],calc = calculations)
 
 println "[${new Date()} $scriptName] ${sampleCollection.size()} sample(s) prepared"
 

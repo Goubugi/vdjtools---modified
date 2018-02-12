@@ -51,6 +51,7 @@ class SampleCollection implements Iterable<Sample> {
     private final boolean strict, lazy, store
 
     private final MetadataTable metadataTable
+    public static int calculations =1
 
     /**
      * Gets a metadata table that allows querying and ordering of samples in this collection.
@@ -141,9 +142,10 @@ class SampleCollection implements Iterable<Sample> {
      * @param sort not sort sample metadata by sample id 
      */
     public SampleCollection(List<String> sampleFileNames, Software software = Software.VDJtools,
-                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false) {
+                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false, int calc =1) {
         this.software = software
         this.strict = strict
+        calculations = calc
         this.lazy = lazy
         this.store = store
         this.metadataTable = new MetadataTable()
@@ -176,10 +178,10 @@ class SampleCollection implements Iterable<Sample> {
      * @param strict if set to false, will ignore samples with missing files, otherwise will throw an exception in such case.
      * @param sort whether to sort sample metadata by sample id.
      */
-    public SampleCollection(String sampleMetadataFileName, Software software = Software.VDJtools,
-                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false) {
+    public SampleCollection(String sampleMetadataFileName,  Software software = Software.VDJtools,
+                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false, int calc =1) {
         this.software = software
-
+		calculations = calc
         this.store = store
         this.lazy = lazy
         this.strict = strict

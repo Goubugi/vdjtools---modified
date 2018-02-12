@@ -33,6 +33,7 @@ import com.antigenomics.vdjtools.ClonotypeWrapperContainer;
 import com.antigenomics.vdjtools.io.parser.ClonotypeStreamParser;
 import com.antigenomics.vdjtools.misc.Software;
 import com.antigenomics.vdjtools.sample.metadata.SampleMetadata;
+import com.antigenomics.vdjtools.sample.SampleCollection;
 
 import java.io.InputStream;
 import java.util.*;
@@ -174,16 +175,18 @@ public class Sample implements ClonotypeWrapperContainer<Clonotype> {
                     prevCount = count;
                 }
 
+                
                 Clonotype existing = null;
-
-                if (collapse) {
-                    existing = existingClonotypes.get(clonotype);
-
-                    if (existing != null) {
-                        existing.append(clonotype);
-                    } else {
-                        existingClonotypes.put(clonotype, clonotype);
-                    }
+                if ( SampleCollection.calculations == 1) {
+	                if (collapse) {
+	                    existing = existingClonotypes.get(clonotype);
+	
+	                    if (existing != null) {
+	                        existing.append(clonotype);
+	                    } else {
+	                        existingClonotypes.put(clonotype, clonotype);
+	                    }
+	                }
                 }
 
                 sample.addClonotype(clonotype, store, existing);
