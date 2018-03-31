@@ -150,65 +150,69 @@ public class Sample implements ClonotypeWrapperContainer<Clonotype> {
      * @return sample instance.
      */
     public static Sample fromInputStream(InputStream inputStream,
-                                         SampleMetadata sampleMetadata,
-                                         Software software,
-                                         int top, boolean store, boolean collapse) {
-        Sample sample = new Sample(sampleMetadata);
-        ClonotypeStreamParser clonotypeStreamParser = ClonotypeStreamParser.create(inputStream, software, sample);
+            SampleMetadata sampleMetadata,
+            Software software,
+            int top, boolean store, boolean collapse) {
+Sample sample = new Sample(sampleMetadata);
+ClonotypeStreamParser clonotypeStreamParser = ClonotypeStreamParser.create(inputStream, software, sample);
 
-        sample.annotationHeader = clonotypeStreamParser.getAnnotationHeader();
+sample.annotationHeader = clonotypeStreamParser.getAnnotationHeader();
 
-        boolean sorted = !collapse;
-        int prevCount = Integer.MAX_VALUE;
+boolean sorted = !collapse;
+int prevCount = Integer.MAX_VALUE;
 
-        Map<Clonotype, Clonotype> existingClonotypes = new HashMap<>();
+Map<Clonotype, Clonotype> existingClonotypes = new HashMap<>();
 
-        for (Clonotype clonotype : clonotypeStreamParser) {
-            if (top > -1 && sample.getDiversity() == top)
-                break;
-
-            if (clonotype != null) {
-                int count = (int) clonotype.getCount();
-
-                if (sorted && count > prevCount) {
-                    sorted = false;
-                    prevCount = count;
-                }
-
-                
-                Clonotype existing = null;
-                if ( SampleCollection.calculations == 1) {
-	                if (collapse) {
-	                    existing = existingClonotypes.get(clonotype);
+	for (Clonotype clonotype : clonotypeStreamParser) {
 	
-	                    if (existing != null) {
-	                        existing.append(clonotype);
-	                    } else {
-	                        existingClonotypes.put(clonotype, clonotype);
-	                    }
-	                }
-                }
+			if (top > -1 && sample.getDiversity() == top)
+				break;
 
-                sample.addClonotype(clonotype, store, existing);
-            }
-        }
+			if (clonotype != null) {
+				int count = (int) clonotype.getCount();
 
-        clonotypeStreamParser.finish(); // report progress
+				if (sorted && count > prevCount) {
+					sorted = false;
+					prevCount = count;
+				}
 
-        // on-demand sorting
-        if (!sorted)
-            Collections.sort(sample.clonotypes);
+				
+				Clonotype existing = null;
+				if (collapse) {
+					
+					existing = existingClonotypes.get(clonotype);
 
-        // Re-calculate frequencies for per read storing software
-        if (software.isPerReadOutput()) {
-            sample.frequency = 0;
-            for (Clonotype clonotype : sample) {
-                sample.frequency += clonotype.recalculateFrequency();
-            }
-        }
+					
+					if (existing != null) {
+						existing.append(clonotype);
+					} else {
+						existingClonotypes.put(clonotype, clonotype);
+					}
+			}
 
-        return sample;
-    }
+				sample.addClonotype(clonotype, store, existing);
+			}
+
+	}
+
+	
+
+	clonotypeStreamParser.finish(); // report progress
+
+	// on-demand sorting
+	if (!sorted)
+		Collections.sort(sample.clonotypes);
+
+	// Re-calculate frequencies for per read storing software
+	if (software.isPerReadOutput()) {
+		sample.frequency = 0;
+		for (Clonotype clonotype : sample) {
+			sample.frequency += clonotype.recalculateFrequency();
+		}
+	}
+
+	return sample;
+}	
 
     /**
      * Reads sample from input stream. Stores the sample into memory.

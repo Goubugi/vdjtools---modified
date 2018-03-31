@@ -65,6 +65,7 @@ public class BasicStats {
      * @param weighted if set to {@code true}, will use clonotype frequency to weight mean_cdr3nt_length, mean_insert_size and mean_ndn_size
      */
     public BasicStats(Sample sample, boolean weighted) {
+    	
         this.count = sample.count
         this.diversity = sample.diversity
 

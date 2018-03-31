@@ -44,6 +44,7 @@ public class SampleFileConnection extends SampleStreamConnection {
      * @return sample object filled with clonotypes.
      */
     public static Sample load(String fileName) {
+
         load(fileName, Software.VDJtools)
     }
 
@@ -54,6 +55,7 @@ public class SampleFileConnection extends SampleStreamConnection {
      * @return sample object filled with clonotypes.
      */
     public static Sample load(String fileName, Software software) {
+
         load(new FileInputStreamFactory(fileName), software)
     }
 
@@ -65,6 +67,7 @@ public class SampleFileConnection extends SampleStreamConnection {
      * @return sample object filled with clonotypes.
      */
     public static Sample load(String fileName, Software software, SampleMetadata sampleMetadata) {
+
         load(new FileInputStreamFactory(fileName), software, sampleMetadata)
     }
 
@@ -87,6 +90,7 @@ public class SampleFileConnection extends SampleStreamConnection {
      */
     public SampleFileConnection(String fileName, Software software, SampleMetadata sampleMetadata) {
         this(fileName, software, sampleMetadata, false, true)
+
     }
 
     /**
@@ -100,5 +104,6 @@ public class SampleFileConnection extends SampleStreamConnection {
     public SampleFileConnection(String fileName, Software software, SampleMetadata sampleMetadata,
                                 boolean lazy, boolean store) {
         super(new FileInputStreamFactory(fileName), software, sampleMetadata, lazy, store)
+
     }
 }

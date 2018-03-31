@@ -179,11 +179,15 @@ class SampleCollection implements Iterable<Sample> {
      * @param sort whether to sort sample metadata by sample id.
      */
     public SampleCollection(String sampleMetadataFileName, int calc) {
-		this(sampleMetadataFileName,  Software.VDJtools, false, true, true, false, calc);
+		this(sampleMetadataFileName,  Software.VDJtoolsRenorm, false, true, true, false, calc);
+		// goubugi
+		//this(sampleMetadataFileName,  Software.VDJtools, false, true, true, false, calc);
     }
     
+    
+    
     public SampleCollection(String sampleMetadataFileName,  Software software = Software.VDJtools,
-                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false, int calc =1) {
+                            boolean store = false, boolean lazy = true, boolean strict = true, boolean sort = false, int calc = 1) {
         this.software = software
 		calculations = calc
         this.store = store

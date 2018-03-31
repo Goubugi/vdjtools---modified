@@ -474,25 +474,67 @@ public class Clonotype implements Comparable<Clonotype>, Countable, ClonotypeWra
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Clonotype clonotype = (Clonotype) o;
-
-        if (!cdr3nt.equals(clonotype.cdr3nt)) return false;
-        if (!j.equals(clonotype.j)) return false;
-        if (!parent.equals(clonotype.parent)) return false;
-        if (!v.equals(clonotype.v)) return false;
-
-        return true;
+    
+		if(SampleCollection.calculations ==1) {
+	        if (this == o) return true;
+	        if (o == null || getClass() != o.getClass()) return false;
+	
+	        Clonotype clonotype = (Clonotype) o;
+	
+	        if (!cdr3nt.equals(clonotype.cdr3nt)) return false;
+	        if (!j.equals(clonotype.j)) return false;
+	        if (!parent.equals(clonotype.parent)) return false;
+	        if (!v.equals(clonotype.v)) return false;
+	
+	
+	        return true;
+    	}else if(SampleCollection.calculations ==2) {
+   
+    		if (this == o) return true;
+    
+	        if (o == null || getClass() != o.getClass()) return false;
+	
+	        Clonotype clonotype = (Clonotype) o;
+	     
+	        if (!cdr3nt.equals(clonotype.cdr3nt)) return false;
+	       // if (!j.equals(clonotype.j)) return false;
+	     
+	        if (!parent.equals(clonotype.parent)) return false;   
+	       // if (!v.equals(clonotype.v)) return false;
+	  
+	        return true;
+    	}else {
+    		if (this == o) return true;
+	        if (o == null || getClass() != o.getClass()) return false;
+	
+	        Clonotype clonotype = (Clonotype) o;
+	
+	     //   if (!cdr3nt.equals(clonotype.cdr3nt)) return false;
+	        if (!j.equals(clonotype.j)) return false;
+	        if (!parent.equals(clonotype.parent)) return false;
+	        if (!v.equals(clonotype.v)) return false;
+	
+	
+	        return true;
+    	}
     }
 
     @Override
     public int hashCode() {
-        int result = parent.hashCode();
-        result = 31 * result + v.hashCode();
-        result = 31 * result + j.hashCode();
-        result = 31 * result + cdr3nt.hashCode();
+    	int result = parent.hashCode();
+    	if(SampleCollection.calculations ==1) {
+	        result = 31 * result + v.hashCode();
+	        result = 31 * result + j.hashCode();
+	        result = 31 * result + cdr3nt.hashCode();
+    	}else if(SampleCollection.calculations==2) {
+	     //   result = 31 * result + v.hashCode();
+	   //     result = 31 * result + j.hashCode();
+	        result = 31 * result + cdr3nt.hashCode();
+    	}else {
+	        result = 31 * result + v.hashCode();
+	        result = 31 * result + j.hashCode();
+	   //     result = 31 * result + cdr3nt.hashCode();
+    	}
         return result;
     }
 

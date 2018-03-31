@@ -74,10 +74,11 @@ enum Software {
     // Same for RTCR - need to recompute frequencies
     RTCR("\t", null, 1, true, true, ["count", "cdr3aa", "v", "j",
                                        "cdr3nt", "VEnd", "JStart"]),
+      
     VDJtools("\t", null, 1, false, false, ["count", "freq",
                                            "cdr3nt", "cdr3aa",
                                            "v", "d", "j",
-                                           "VEnd", "DStart", "DEnd", "JStart"]),
+                                           "VEnd", "DStart", "DEnd", "JStart"]),                                     
     VDJtoolsRenorm("\t", null, 1, true, true, ["count", "freq",
                                            "cdr3nt", "cdr3aa",
                                            "v", "d", "j",
