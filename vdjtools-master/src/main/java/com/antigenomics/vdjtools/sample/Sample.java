@@ -44,7 +44,7 @@ import java.util.*;
 public class Sample implements ClonotypeWrapperContainer<Clonotype> {
     private final List<Clonotype> clonotypes = new ArrayList<>();
     private final SampleMetadata sampleMetadata;
-    private double frequency = 0;
+    public double frequency = 0;
     private long count = 0;
     private int diversity = 0;
     private String annotationHeader = null;
@@ -235,6 +235,7 @@ Map<Clonotype, Clonotype> existingClonotypes = new HashMap<>();
     private void addClonotype(Clonotype clonotype, boolean store, Clonotype existingClonotype) {
         count += clonotype.getCount();
         frequency += clonotype.getFreqAsInInput();
+        System.out.println(frequency);
 
         if (existingClonotype == null) {
             diversity++;

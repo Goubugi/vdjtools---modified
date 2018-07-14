@@ -267,6 +267,7 @@ class MetadataTable implements Iterable<SampleMetadata> {
      */
     SampleMetadata createRow(String sampleId, List<String> rowValues) {
         // Create metadata entries, assign current metadata as parent
+        println("hello")
         def entries = new ArrayList<MetadataEntry>()
 
         def sampleMetadata = SampleMetadata.predefined(sampleId, entries, this)

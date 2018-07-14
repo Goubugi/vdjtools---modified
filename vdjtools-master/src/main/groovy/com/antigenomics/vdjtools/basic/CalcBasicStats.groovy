@@ -103,7 +103,8 @@ new File(formOutputPath(outputFilePrefix, "basicstats")).withPrintWriter { pw ->
 
     sampleCollection.each { Sample sample ->
         def basicStats = new BasicStats(sample, !unweighted)
-
+        def test = sample.getFreqAsInInput()
+		pw.println(test)
         println "[${new Date()} $scriptName] ${++sampleCounter} sample(s) processed"
 
         pw.println([sample.sampleMetadata.sampleId, sample.sampleMetadata, basicStats].join("\t"))

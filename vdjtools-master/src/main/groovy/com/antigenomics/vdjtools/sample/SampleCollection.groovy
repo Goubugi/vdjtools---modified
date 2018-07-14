@@ -210,8 +210,10 @@ class SampleCollection implements Iterable<Sample> {
             while ((line = reader.readLine()) != null) {
                 if (!line.startsWith("#") && line.trim().length() != 0) {
                     splitLine = line.split("\t")
-
                     if (splitLine.length != metadataColumns.length) {
+
+						println("sl l" +splitLine.length)
+						println("mcl "+metadataColumns.length)
                         throw new RuntimeException("Error parsing metadata. Number of columns in line $splitLine " +
                                 "is different from that of header $metadataColumns")
                     }

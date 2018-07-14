@@ -68,7 +68,6 @@ public class BasicStats {
     	
         this.count = sample.count
         this.diversity = sample.diversity
-
         this.cloneSize = new DescriptiveStatistics()
         this.cloneSizeGeom = new DescriptiveStatistics()
 
@@ -85,6 +84,7 @@ public class BasicStats {
         double denom = 0
 
         sample.each {
+        System.out.println(it.freq)
             cloneSize.addValue(it.freq)
             cloneSizeGeom.addValue(Math.log10(it.freq))
 
